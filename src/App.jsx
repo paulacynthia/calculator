@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import './App.css';
-export default function App() {
-  let monitor = document.getElementById('monitor');
+import { construct } from './truthtable';
 
-  function insereNum(val) {
-    let monitor = document.getElementById('monitor');
-    console.log(val);
-    monitor.innerHTML += val;
+export default function App() {
+  const [value, setValue] = useState('');
+
+  var arr = [];
+
+  function handleClick(val) {
+    arr.push(val);
+    console.log('bola', arr);
+    setValue(value + val);
   }
 
   function deleteInput() {
-    monitor.innerHTML = '';
+    setValue('');
   }
 
   return (
@@ -17,7 +22,7 @@ export default function App() {
       <div className="container">
         <header>
           <h1>Tabela Verdade Online</h1>
-          <div id="monitor"></div>
+          <input className="monitor" value={value} id="in" />
         </header>
         <div className="buttons-especials">
           <button type="button" value="AC">
@@ -26,61 +31,54 @@ export default function App() {
           <button type="button" onClick={deleteInput} value="DEL">
             DEL
           </button>
-          <button type="button" value="=">
+          <button type="button" onClick={construct} value="=">
             =
           </button>
         </div>
 
         <div className="buttons">
           <div>
-            <button type="button" onClick={() => insereNum('p')} value="p">
+            <button type="button" onClick={() => handleClick('p')} value="p">
               p
             </button>
-            <button type="button" onClick={() => insereNum('q')} value="q">
+            <button type="button" onClick={() => handleClick('q')} value="q">
               q
             </button>
-            <button type="button" onClick={() => insereNum('r')} value="r">
+            <button type="button" onClick={() => handleClick('r')} value="r">
               r
             </button>
-            <button type="button" onClick={() => insereNum('s')} value="s">
+            <button type="button" onClick={() => handleClick('s')} value="s">
               s
             </button>
           </div>
 
           <div>
-            <button type="button" onClick={() => insereNum('p')} value="~">
+            <button type="button" onClick={() => handleClick('~')} value="~">
               ~
             </button>
-            <button type="button" onClick={() => insereNum('^')} value="^">
+            <button type="button" onClick={() => handleClick('&')} value="&">
               ^
             </button>
-            <button type="button" onClick={() => insereNum('v')} value="v">
+            <button type="button" onClick={() => handleClick('v')} value="v">
               v
             </button>
-            <button
-              type="button"
-              onClick={() => insereNum('⇾')}
-              value="seta-direita"
-            >
+            <button type="button" onClick={() => handleClick('>')} value=">">
               ⇾
             </button>
           </div>
           <div>
-            <button
-              type="button"
-              onClick={() => insereNum('⇿')}
-              value="seta-dupla"
-            >
+            <button type="button" onClick={() => handleClick('<>')} value="<>">
               ⇿
             </button>
-            <button type="button" onClick={() => insereNum('(')} value="(">
+            <button type="button" onClick={() => handleClick('(')} value="(">
               (
             </button>
-            <button type="button" onClick={() => insereNum(')')} value=")">
+            <button type="button" onClick={() => handleClick(')')} value=")">
               )
             </button>
           </div>
         </div>
+        <div id="tt"></div>
       </div>
     </div>
   );

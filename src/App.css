@@ -32,7 +32,7 @@ body {
   text-align: center;
 }
 
-#monitor {
+.monitor {
   outline: none;
   border: 1px solid #d0d5dd;
   border-radius: 0.5rem;
